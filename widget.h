@@ -8,6 +8,7 @@
 #include <QSpinBox>
 #include <QComboBox>
 #include "paintingwidgetrgb.h"
+#include "stdlib.h"
 
 class Widget : public QWidget
 {
@@ -16,26 +17,40 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
+
 private slots:
     void onChooseButtonClicked();
     void onRedValueChanged(int i);
     void onGreenValueChanged(int i);
     void onBlueValueChanged(int i);
+    void onColorNameChanged(const QString&);
 
 private:
     PaintingWidgetRGB *pwRGB;
-    QLabel *redLabel, *greenLabel, *blueLabel;
-    QLabel *hueLabel, *satLabel, *valLabel;
-    QLabel *cLabel, *mLabel, *yLabel, *kLabel;
+    //QLabel *redLabel, *greenLabel, *blueLabel,
+    //QLabel *hueLabel, *satLabel, *valLabel;
+    //QLabel *cLabel, *mLabel, *yLabel, *kLabel;
+    QLabel *helpColorLabel;
+    QLabel *rgbLabel, *hsvLabel, *cmykLabel, *labLabel, *xyzLabel, *hlsLabel;
     QSpinBox *redEdit, *greenEdit, *blueEdit;
     QSpinBox  *hueEdit, *satEdit, *valEdit;
     QSpinBox  *cEdit, *mEdit, *yEdit, *kEdit;
+    QSpinBox  *lEdit, *aEdit, *bEdit;
+    QSpinBox  *xEdit, *y1Edit, *zEdit;
+    QSpinBox  *hEdit, *l1Edit, *sEdit;
     QPushButton *chooseButton;
     QLineEdit *colorNameEdit;
     QComboBox *comboBox1, *comboBox2, *comboBox3;
 
-    void changeHSV(int red, int green, int blue);
-    void changeCMYK(int red, int green, int blue);
+    void changeRGB(double red, double green, double blue);
+    void changeHSV(double red, double green, double blue);
+    void changeCMYK(double red, double green, double blue);
+    void changeLAB(double red, double green, double blue);
+    void changeXYZ(double red, double green, double blue);
+    void changeHSL(double red, double green, double blue);
+
+    std::string decToHex(int n);
+
 
 };
 #endif // WIDGET_H
